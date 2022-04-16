@@ -1,12 +1,23 @@
 import { useState } from "react";
+import ExpenseAddBtn from "./ExpenseAddBtn";
 import "./ExpenseForm.css";
 
 const ExpenseForm = (props) => {
+  let [isEditing, setIsEditing] = useState(true);
+
   const [userInput, setUserInput] = useState({
     enteredTitle: "",
     enteredAmount: "",
     enteredDate: "",
   });
+
+  const addExpenseHandler = () => {
+    setIsEditing(false);
+  };
+
+  const onPressnCancelHandler = () => {
+    setIsEditing(true);
+  };
 
   const commonChangeHandler = (value, field) => {
     console.log(
@@ -42,7 +53,9 @@ const ExpenseForm = (props) => {
     props.onSaveExpenseData(userInput);
   };
 
-  return (
+  return isEditing === true ? (
+    <ExpenseAddBtn addExpense={addExpenseHandler} />
+  ) : (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
@@ -74,8 +87,15 @@ const ExpenseForm = (props) => {
           />
         </div>
       </div>
-      <div className="new-expense__actions">
-        <button type="submit">Add Expense</button>
+      <div className="new-expense__btn-seg">
+        <div className="new-expense__actions">
+          <button type="button" onClick={onPressnCancelHandler}>
+            Cancel
+          </button>
+        </div>
+        <div className="new-expense__actions">
+          <button type="submit">Add Expense</button>
+        </div>
       </div>
     </form>
   );

@@ -1,6 +1,7 @@
 import ExpenseItem from "./ExpenseItem";
 import ExpenseFilter from "./ExpenseFilter";
 import Card from "../UI/Card";
+import ExpensesList from "./ExpensesList";
 
 import { useState } from "react";
 
@@ -53,13 +54,6 @@ function Expense(props) {
     setExpense(DUMMY_EXPENSES);
   };
 
-  let expenseContent = <p> No Expense Found</p>;
-
-  if (expense.length > 0) {
-    expenseContent = expense.map((item) => (
-      <ExpenseItem expense={item} key={item.id}></ExpenseItem>
-    ));
-  }
   return (
     <Card className="expense">
       <ExpenseFilter
@@ -67,7 +61,7 @@ function Expense(props) {
         onChangeYear={filterDataByYear}
         onReset={onResetHandler}
       />
-      {expenseContent}
+      <ExpensesList items={expense} />
     </Card>
   );
 }
