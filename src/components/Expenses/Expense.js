@@ -1,11 +1,11 @@
-import ExpenseItem from "./ExpenseItem";
 import ExpenseFilter from "./ExpenseFilter";
 import Card from "../UI/Card";
 import ExpensesList from "./ExpensesList";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 import "./Expense.css";
+import ExpensesChart from "./ExpensesChart";
 
 const DUMMY_EXPENSES = [
   {
@@ -61,6 +61,7 @@ function Expense(props) {
         onChangeYear={filterDataByYear}
         onReset={onResetHandler}
       />
+      <ExpensesChart expenses={expense}></ExpensesChart>
       <ExpensesList items={expense} />
     </Card>
   );
